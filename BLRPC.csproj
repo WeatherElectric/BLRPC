@@ -46,24 +46,25 @@
         <Compile Include="DiscordGameSDK\LobbyManager.cs" />
         <Compile Include="DiscordGameSDK\StorageManager.cs" />
         <Compile Include="DiscordGameSDK\StoreManager.cs" />
-        <Compile Include="Internal\AvatarHandler.cs" />
-        <Compile Include="Internal\CheckBarcode.cs" />
-        <Compile Include="Internal\CheckPallets.cs" />
-        <Compile Include="Internal\DllTools.cs" />
-        <Compile Include="Internal\EmbeddedResource.cs" />
-        <Compile Include="Internal\ExtraesMode.cs" />
-        <Compile Include="Internal\GlobalVariables.cs" />
-        <Compile Include="Main.cs"/>
+        <Compile Include="Main.cs" />
         <Compile Include="Melon\BoneMenu.cs" />
         <Compile Include="Melon\BoneMenuExtensions.cs" />
+        <Compile Include="Melon\DllTools.cs" />
         <Compile Include="Melon\ModConsole.cs" />
         <Compile Include="Melon\Preferences.cs" />
-        <Compile Include="Patching\NPCDeathCounter.cs" />
-        <Compile Include="Patching\PlayerDeathCounter.cs" />
-        <Compile Include="Patching\ShotCounter.cs" />
-        <Compile Include="Patching\SpawnCounter.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="RPC.cs" />
+        <Compile Include="Melon\UserData.cs" />
+        <Compile Include="Presence\Helpers\CheckBarcode.cs" />
+        <Compile Include="Presence\Helpers\CheckPallets.cs" />
+        <Compile Include="Presence\Helpers\ExtraesMode.cs" />
+        <Compile Include="Presence\Managers\AvatarManager.cs" />
+        <Compile Include="Presence\Managers\LevelManager.cs" />
+        <Compile Include="Presence\Managers\RpcManager.cs" />
+        <Compile Include="Presence\Patching\NPCDeathCounter.cs" />
+        <Compile Include="Presence\Patching\PlayerDeathCounter.cs" />
+        <Compile Include="Presence\Patching\ShotCounter.cs" />
+        <Compile Include="Presence\Patching\SpawnCounter.cs" />
+        <Compile Include="Presence\Variables\GlobalVariables.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
@@ -93,7 +94,7 @@
         <Reference Include="SLZ.Marrow.SDK">
           <HintPath>References\SLZ.Marrow.SDK.dll</HintPath>
         </Reference>
-        <Reference Include="System"/>
+        <Reference Include="System" />
         <Reference Include="UnhollowerBaseLib">
             <HintPath>References\UnhollowerBaseLib.dll</HintPath>
         </Reference>

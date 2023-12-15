@@ -1,12 +1,13 @@
-﻿using BLRPC.Internal;
-using BLRPC.Melon;
+﻿using BLRPC.Melon;
+using BLRPC.Presence.Managers;
+using BLRPC.Presence.Variables;
 using HarmonyLib;
 using NEP.DOOMLAB.Entities;
 using SLZ.AI;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedParameter.Global
 
-namespace BLRPC.Patching
+namespace BLRPC.Presence.Patching
 {
     public static class NPCDeathCounter
     {
@@ -37,13 +38,13 @@ namespace BLRPC.Patching
             }
         }
         
-        public static int Counter = 0;
+        public static int Counter;
         private static void UpdateCounter()
         {
             Counter += 1;
             ModConsole.Msg($"NPC died, new death count is {Counter}", 1);
-            GlobalVariables.details = $"NPC Deaths: {Counter}";
-            Rpc.SetRpc(GlobalVariables.details, GlobalVariables.status, GlobalVariables.largeImageKey, GlobalVariables.largeImageText, GlobalVariables.smallImageKey, GlobalVariables.smallImageText);
+            GlobalVariables.Details = $"NPC Deaths: {Counter}";
+            RpcManager.Instance.SetRpc(GlobalVariables.Details, GlobalVariables.Status, GlobalVariables.LargeImageKey, GlobalVariables.LargeImageText, GlobalVariables.SmallImageKey, GlobalVariables.SmallImageText);
         }
     }
 }

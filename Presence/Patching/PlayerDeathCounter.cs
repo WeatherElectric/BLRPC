@@ -1,8 +1,9 @@
-﻿using BLRPC.Internal;
-using BLRPC.Melon;
+﻿using BLRPC.Melon;
+using BLRPC.Presence.Managers;
+using BLRPC.Presence.Variables;
 using HarmonyLib;
 
-namespace BLRPC.Patching
+namespace BLRPC.Presence.Patching
 {
     public static class PlayerDeathCounter
     {
@@ -19,14 +20,14 @@ namespace BLRPC.Patching
             }
         }
         
-        public static int Counter = 0;
+        public static int Counter;
         
         private static void UpdateCounter()
         {
             Counter += 1;
             ModConsole.Msg($"Playerdied, new death count is {Counter}", 1);
-            GlobalVariables.details = $"Player Deaths: {Counter}";
-            Rpc.SetRpc(GlobalVariables.details, GlobalVariables.status, GlobalVariables.largeImageKey, GlobalVariables.largeImageText, GlobalVariables.smallImageKey, GlobalVariables.smallImageText);
+            GlobalVariables.Details = $"Player Deaths: {Counter}";
+            RpcManager.Instance.SetRpc(GlobalVariables.Details, GlobalVariables.Status, GlobalVariables.LargeImageKey, GlobalVariables.LargeImageText, GlobalVariables.SmallImageKey, GlobalVariables.SmallImageText);
         }
         
     }

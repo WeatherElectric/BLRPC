@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace BLRPC.Internal
+namespace BLRPC.Melon
 {
     internal static class DllTools
     {

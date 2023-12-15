@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLRPC.Internal
+namespace BLRPC.Presence.Helpers
 {
     public static class ExtraesMode
     {

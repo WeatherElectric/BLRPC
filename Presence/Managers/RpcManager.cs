@@ -2,30 +2,40 @@
 using BLRPC.Melon;
 using Discord;
 
-namespace BLRPC
+namespace BLRPC.Presence.Managers
 {
-    internal static class Rpc
+    internal class RpcManager
     {
-        public static Discord.Discord Discord;
-        private static ActivityManager _activityManager;
-        private static readonly long Start = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        public static void Initialize()
+        public static RpcManager Instance { get; private set; }
+        
+        public bool RpcStarted { get; private set; }
+        private Discord.Discord Discord;
+        private ActivityManager ActivityManager;
+        private readonly long StartTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        
+        public void Start()
         {
+            Instance = this;
             ModConsole.Msg("Initializing RPC", 1);
             Discord = new global::Discord.Discord(Preferences.DiscordAppId.Value, (ulong)CreateFlags.Default);
             ModConsole.Msg($"Discord is {Discord}", 1);
             ModConsole.Msg($"Application ID is {Preferences.DiscordAppId.Value}", 1);
-            _activityManager = Discord.GetActivityManager();
-            ModConsole.Msg($"Activity manager is {_activityManager}", 1);
+            ActivityManager = Discord.GetActivityManager();
+            ModConsole.Msg($"Activity manager is {ActivityManager}", 1);
             SetRpc(null, "Loading Game", "bonelab", "BONELAB", null, null);
         }
 
-        public static void Dispose()
+        internal void Update()
+        {
+            Discord.RunCallbacks();
+        }
+
+        public void Dispose()
         {
             Discord.Dispose();
         }
         
-        public static void SetRpc(string details, string state, string largeImageKey, string largeImageText, string smallImageKey, string smallImageText)
+        public void SetRpc(string details, string state, string largeImageKey, string largeImageText, string smallImageKey, string smallImageText)
         {
             ModConsole.Msg($"Setting activity with details {details}, state {state}, large image key {largeImageKey}, and large image text {largeImageText}", 1);
             var activity = new Activity
@@ -34,7 +44,7 @@ namespace BLRPC
                 Details = details,
                 Timestamps =
                 {
-                    Start = Start
+                    Start = StartTime
                 },
                 Assets =
                 {
@@ -45,7 +55,7 @@ namespace BLRPC
                 },
                 Instance = false
             };
-            _activityManager.UpdateActivity(activity, (result) =>
+            ActivityManager.UpdateActivity(activity, (result) =>
             {
                 if (result == global::Discord.Result.Ok)
                 {

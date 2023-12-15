@@ -1,7 +1,7 @@
 ﻿using BLRPC.Melon;
 using SLZ.Marrow.Warehouse;
 
-namespace BLRPC.Internal
+namespace BLRPC.Presence.Helpers
 {
     public static class CheckPallets
     {
